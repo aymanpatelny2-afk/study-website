@@ -27,15 +27,17 @@ function set(k){R.dataset.t=k;[].forEach.call(el.children,function(c){c.classLis
 el.onclick=function(e){if(e.target.dataset.k)set(e.target.dataset.k)};set(cur)}
 var $=function(i){return document.getElementById(i)};function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("on")},1600)}
 var W=[["觉得","juéde","to feel, to think"],["非常","fēicháng","very"],["旁边","pángbiān","beside"],["机场","jīchǎng","airport"],["便宜","piányi","cheap"],["生日","shēngrì","birthday"],["准备","zhǔnbèi","to prepare"],["介绍","jièshào","to introduce"],["希望","xīwàng","to hope"],["考试","kǎoshì","exam"],["说话","shuōhuà","to speak"],["身体","shēntǐ","body"]];</script><div class="toast" id="toast" role="status"></div><div class="w"><header class="bar top"><b class="fd" style="font-size:22px">Stroke Studio</b><a class="btn alt" href="index.html" style="padding:6px 14px;text-decoration:none">← Study Hub</a></header>
-<div class="bar"><div><div class="fd" style="font-size:26px" id="py"></div><div style="color:var(--muted)" id="mn"></div></div><span class="lab">Strokes drawn <b id="sc">0</b></span></div>
+<div class="bar"><div><div class="fd" style="font-size:26px" id="py"></div><div style="color:var(--muted)" id="mn"></div></div><span class="lab">Strokes <b id="sc">0</b></span></div>
 <div class="pad" id="pad"><div class="gh" id="gh"></div><canvas id="cv"></canvas></div>
-<div class="row"><button class="btn alt" id="gd">Hide guide</button><button class="btn pk" id="cl">Clear</button><button class="btn" id="nx">Next word</button></div></div><script>var cv=$("cv"),c=cv.getContext("2d"),dn=0,sc=0,wi=0,gv=1;
+<div class="row"><button class="btn alt" id="gd">Hide guide</button><button class="btn pk" id="cl">Clear</button><button class="btn" id="nx">Next word</button></div></div><script>var SC={"觉":9,"得":11,"非":8,"常":11,"旁":10,"边":5,"机":6,"场":6,"便":9,"宜":8,"生":5,"日":4,"准":10,"备":8,"介":4,"绍":8,"希":7,"望":11,"考":6,"试":8,"说":9,"话":8,"身":7,"体":7},CL=[];W.forEach(function(w){w[0].split("").forEach(function(ch){CL.push([ch,SC[ch],w])})});var SLACK=4;
+var cv=$("cv"),c=cv.getContext("2d"),dn=0,sc=0,wi=0,gv=1;
 function size(){var r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;c.setTransform(d,0,0,d,0,0)}
 function pos(e){var r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]}
 cv.onpointerdown=function(e){dn=1;cv.setPointerCapture(e.pointerId);var p=pos(e);c.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--pink");c.lineWidth=Math.max(8,cv.getBoundingClientRect().width/32);c.lineCap=c.lineJoin="round";c.beginPath();c.moveTo(p[0],p[1]);c.lineTo(p[0]+.1,p[1]+.1);c.stroke()};
 cv.onpointermove=function(e){if(!dn)return;var p=pos(e);c.lineTo(p[0],p[1]);c.stroke()};
-cv.onpointerup=cv.onpointercancel=function(){if(!dn)return;dn=0;sc++;$("sc").textContent=sc};
-function clr(){var r=cv.getBoundingClientRect();c.clearRect(0,0,r.width,r.height);sc=0;$("sc").textContent=0}
-function word(){var w=W[wi];$("gh").textContent=w[0][0];$("py").textContent=w[0]+" · "+w[1];$("mn").textContent=w[2];clr()}
-$("cl").onclick=clr;$("nx").onclick=function(){wi=(wi+1)%W.length;word()};$("gd").onclick=function(){gv=!gv;$("gh").classList.toggle("off",!gv);this.textContent=gv?"Hide guide":"Show guide"};
+cv.onpointerup=cv.onpointercancel=function(){if(!dn)return;dn=0;sc++;stat()};
+function stat(){var tg=CL[wi][1],o=sc>tg+SLACK;$("sc").textContent=sc+" / "+tg;$("sc").style.color=o?"var(--pink)":""}
+function clr(){var r=cv.getBoundingClientRect();c.clearRect(0,0,r.width,r.height);sc=0;stat()}
+function word(){var e=CL[wi];$("gh").textContent=e[0];$("py").textContent=e[0]+" · from "+e[2][0]+" "+e[2][1];$("mn").textContent=e[2][2]+" · target "+e[1]+" strokes";clr()}
+$("cl").onclick=clr;$("nx").onclick=function(){var tg=CL[wi][1];if(sc>tg+SLACK){toast(sc+" strokes is more than "+SLACK+" over the target of "+tg+". Clear and try again.");return}toast(sc>=tg?"Target met. Next character!":"Moving on with "+sc+" of "+tg+" strokes.");wi=(wi+1)%CL.length;word()};$("gd").onclick=function(){gv=!gv;$("gh").classList.toggle("off",!gv);this.textContent=gv?"Hide guide":"Show guide"};
 addEventListener("resize",function(){size();clr()});size();word();</script>

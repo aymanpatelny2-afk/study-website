@@ -40,12 +40,23 @@ var MOUTH={happy:"M58 82q12 12 24 0",oops:"M58 90q12-10 24 0",wow:"M64 82a6 7 0 
 function mood(cls,m,text){mo.classList.remove("bounce","shake");void mo.getBoundingClientRect();if(cls)mo.classList.add(cls);$("mouth").setAttribute("d",MOUTH[m]);
 $("eyes").innerHTML=m=="oops"?'<path d="M44 60l12 6"/><path d="M96 60l-12 6"/>':m=="flat"?'<path d="M44 66h12"/><path d="M84 66h12"/>':'<path d="M44 66q6-8 12 0"/><path d="M84 66q6-8 12 0"/>';if(text)$("bubble").textContent=text}
 function yes(w){mood("bounce","wow","+10 XP! "+w+" is yours.")}function no(w){mood("shake","oops","+5 XP. "+w+" goes to your review pile.")}
+var CH={start:[["happy","Eyes on the cards. You've got this."],["happy","Timer's running. I'll be right here."],["wow","Let's do this. One card at a time."],["happy","Deep breath. Here we go."],["happy","Focus mode on. Phone face down?"]],
+cheer:[["happy","Still going strong!"],["happy","You're in the zone."],["wow","Look at you, not even blinking."],["happy","Every minute counts. Keep going."],["flat","Shh... studying in progress."]],
+half:[["wow","Halfway there!"],["happy","Half done. The hard part is behind you."],["wow","50%! Mochi is impressed."]],
+pause:[["flat","Paused. I'll keep your seat warm."],["flat","Quick breather? I'll wait."],["flat","Holding the timer. Take your time."]],
+reset:[["flat","Reset. Ready when you are."],["happy","Clean slate. Let's go again."],["flat","Timer cleared. Pick up whenever."]],
+done:[["wow","Session done! +50 XP. Take a 5 minute break."],["wow","Nailed it! +50 XP. Time to rest."],["wow","That's a full session. +50 XP, you earned a break."],["happy","Well focused! +50 XP. Stretch those legs."]],
+brk:[["happy","Stretch and sip some water."],["happy","Break time. Look at something far away."],["happy","Rest your eyes. Back soon."]],
+back:[["happy","Break over. Ready for another?"],["happy","Recharged? Let's start the next one."],["wow","Round two. Ready, set..."]],
+poke:[["wow","Hey! I'm studying here."],["happy","Hehe, that tickles."],["wow","Boop! Did you need something?"],["oops","Not the spike, please."],["happy","I'm cheering for you in my head."]]},lastc={};
+function say(k){var a=CH[k],i;do{i=Math.floor(Math.random()*a.length)}while(a.length>1&&lastc[k]===i);lastc[k]=i;var l=a[i];mood(l[0]=="flat"?null:"bounce",l[0],l[1])}
+var half=0;mo.style.cursor="pointer";mo.onclick=function(){say("poke")};
 var m="f",D={f:1500,b:300},t=1500,run=0,iv,fast=0,ns=0,xp=0,tk=0;mood(null,"flat","Press start and I'll study with you.");
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 function draw(){$("tm").textContent=fmt(t);$("rg").style.setProperty("--p",(1-t/D[m])*100);$("ph").textContent=run?(m=="f"?"Focusing":"Resting"):(t==D[m]?"Ready":"Paused");$("go").textContent=run?"Pause":t==D[m]?"Start":"Resume";
 $("pp").innerHTML=[0,1,2,3].map(function(i){return'<i class="'+(i<ns%4||(ns&&ns%4==0&&i<4)?"on":"")+'"></i>'}).join("");$("ns").textContent=ns;$("xp").textContent=xp}
-function tick(){t=Math.max(0,t-(fast?25:1));tk++;if(m=="f"&&tk%10==0)mood("bounce","happy","");if(!t){clearInterval(iv);run=0;if(m=="f"){ns++;xp+=50;mood("bounce","wow","Session done! +50 XP. Take a 5 minute break.");setm("b",1)}else{mood("bounce","happy","Break over. Ready for another?");setm("f",1)}}draw()}
+function tick(){t=Math.max(0,t-(fast?25:1));tk++;if(m=="f"&&!half&&1-t/D[m]>=.5){half=1;say("half")}else if(m=="f"&&tk%20==0)say("cheer");if(!t){clearInterval(iv);run=0;if(m=="f"){ns++;xp+=50;say("done");setm("b",1)}else{say("back");setm("f",1)}}draw()}
 function setm(k,keep){m=k;t=D[k];if(!keep){run=0;clearInterval(iv)}[].forEach.call($("md").children,function(b){b.classList.toggle("on",b.dataset.m==k)});draw()}
-$("go").onclick=function(){if(run){run=0;clearInterval(iv);mood(null,"flat","Paused. I'll keep your seat warm.")}else{run=1;clearInterval(iv);iv=setInterval(tick,1000);mood("bounce","happy",m=="f"?"Eyes on the cards. You've got this.":"Stretch and sip some water.")}draw()};
-$("rs").onclick=function(){setm(m);mood(null,"flat","Reset. Ready when you are.")};
+$("go").onclick=function(){if(run){run=0;clearInterval(iv);say("pause")}else{run=1;clearInterval(iv);iv=setInterval(tick,1000);half=0;say(m=="f"?"start":"brk")}draw()};
+$("rs").onclick=function(){setm(m);say("reset")};
 $("md").onclick=function(e){var b=e.target;if(b.dataset.m)setm(b.dataset.m);if(b.id=="ft"){fast=!fast;b.textContent="Fast demo: "+(fast?"on":"off")}};draw();</script>
