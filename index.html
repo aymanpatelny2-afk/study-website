@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Study Hub</title><script src="theme.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@800&display=swap">
+<style>
+:root{--bg:#17120f;--surface:#241c18;--cream:#f6ecd9;--muted:#cdbfa9;--yellow:#f9c733;--pink:#ff8ee0;--teal:#3fdcc8;--ink:#241812;--shadow:#000;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#3a2a3f 0%,var(--bg) 60%) var(--bg);color:var(--cream);font:15px/1.45 "DM Sans",system-ui,sans-serif;padding:20px 16px 40px;min-height:100vh}
+h1,h2,h3,.fd{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;margin:0}
+.w{max-width:1100px;margin:auto;display:grid;gap:18px}
+.box{background:var(--surface);border:3px solid var(--cream);border-radius:24px;padding:16px;box-shadow:6px 6px 0 var(--shadow);min-width:0}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.top h1{font-size:34px}.top p{margin:4px 0 0;color:var(--muted)}
+.main{display:grid;gap:18px}
+.row1{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:18px;align-items:stretch}@media(max-width:759px){.row1{grid-template-columns:minmax(0,1fr)}}
+.rc{display:flex;flex-direction:column;gap:18px}.rc>.box{flex:1;display:flex;flex-direction:column;justify-content:center}
+.big{font:800 40px/1 "Bricolage Grotesque",sans-serif}
+.sb{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.wkb{flex:1;min-width:200px}
+.week{display:flex;gap:6px;margin-top:6px}.week div{flex:1;text-align:center;font-size:11px;color:var(--muted)}.week i{display:block;aspect-ratio:1;max-width:36px;margin:0 auto 3px;border-radius:50%;border:2px solid var(--cream)}.week i.on{background:var(--yellow)}.week i.t{border-color:var(--pink);box-shadow:0 0 0 3px var(--pink)}
+.goal{display:flex;gap:14px;align-items:center}.ring{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;flex:none}.ring i{width:62px;height:62px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font:800 17px "Bricolage Grotesque",sans-serif;font-style:normal}
+.step{display:flex;gap:6px;margin-top:8px}.step button{width:34px;height:34px;border-radius:50%;border:2px solid var(--cream);background:var(--bg);font-weight:800}
+.bar{height:12px;border:2px solid var(--cream);border-radius:99px;overflow:hidden;background:var(--bg);margin-top:8px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .5s}
+.pet{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:62px 18px 24px;color:#f6ecd9;transition:background .4s}
+.pet svg{width:min(100%,280px);height:auto}.pet b{display:block;font:800 26px "Bricolage Grotesque",sans-serif}.pet small{color:#bfb3c4}
+#pb{transform-origin:60px 108px;animation:wb 3s infinite ease-in-out}@keyframes wb{50%{transform:scale(1.05,.95)}}.up #pb{animation:bn .7s infinite alternate ease-in-out}@keyframes bn{to{transform:translateY(-8px) scale(1.03,.97)}}
+.z{animation:zf 2.4s infinite;opacity:0;fill:#f3e9e1;stroke:none;font-weight:700}@keyframes zf{0%{opacity:0;transform:translate(0,8px)}30%{opacity:1}100%{opacity:0;transform:translate(8px,-14px)}}
+.pn{position:absolute;left:14px;top:14px;border:3px solid var(--cream);background:var(--yellow);color:var(--ink);border-radius:99px;padding:6px 12px;font:700 13px "DM Sans",sans-serif;text-decoration:none}
+.decks{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.dk{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);border:3px solid var(--cream);border-radius:24px;padding:16px;box-shadow:6px 6px 0 var(--shadow);min-height:160px}
+.dk h3{font-size:22px;line-height:1.1}.dk p{margin:0;font-size:13px}.dk .bar{background:#fff5;border-color:var(--ink)}.dk .bar i{background:var(--ink)}.dk em{margin-top:auto;font-style:normal;font-weight:800;background:var(--ink);color:var(--cream);border-radius:99px;padding:6px 14px;font-size:13px;align-self:flex-start}
+.d1{background:var(--pink)}.d2{background:var(--teal)}.new{background:none;color:var(--cream);border-style:dashed;align-items:center;justify-content:center;text-align:center;box-shadow:none}
+#achv{display:none}body.av #achv{display:block}body.av .main{display:none}
+.ah{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}.ah h2{font-size:24px}.ah span{color:var(--muted)}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px}
+.mdl{display:grid;gap:3px;background:var(--surface);border:3px solid var(--cream);border-radius:24px;box-shadow:6px 6px 0 var(--shadow);padding:20px 12px 14px;text-align:center}.mdl small{color:var(--muted)}
+.mdl .m{position:relative;isolation:isolate;width:76px;height:76px;margin:0 auto 20px;border-radius:50%;display:grid;place-items:center;font-size:32px;background:radial-gradient(circle at 30% 25%,#fff6b0,#f9c733 55%,#c98a10);border:4px solid #fff3c4;box-shadow:0 0 0 3px #7a5200}
+.mdl .m:before,.mdl .m:after{content:"";position:absolute;bottom:-18px;width:18px;height:26px;background:var(--pink);z-index:-1;clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}.mdl .m:before{left:16px;transform:rotate(10deg)}.mdl .m:after{right:16px;transform:rotate(-10deg)}
+.mdl.off .m{background:radial-gradient(circle at 30% 25%,#e4e4e4,#8a8a8a 60%,#5a5a5a);border-color:#bbb;box-shadow:0 0 0 3px #444;filter:grayscale(1);opacity:.6}.mdl.off .m:before,.mdl.off .m:after{background:#777}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.w{max-width:1700px}.app{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px}.mainc{display:grid;gap:18px;min-width:0;align-content:start}
+.side{align-self:start;position:sticky;top:16px;display:grid;gap:8px}
+.nv{display:flex;align-items:center;gap:8px;text-decoration:none;border:3px solid var(--cream);border-radius:16px;padding:10px 12px;font:700 14px "DM Sans",sans-serif;background:none;color:var(--cream);text-align:left;cursor:pointer;width:100%}.nv.on{background:var(--pink);color:var(--ink)}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;grid-template-areas:"st go xp" "pet dk dk" "pet md wd"}
+.a-st{grid-area:st}.a-go{grid-area:go}.a-xp{grid-area:xp}.a-pet{grid-area:pet}.a-dk{grid-area:dk}.a-md{grid-area:md}.a-wd{grid-area:wd}
+.g3>.box{display:flex;flex-direction:column;justify-content:center}.g3>.pet{align-items:center}.g3>.a-dk{justify-content:flex-start}
+.mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.mini i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:18px;background:radial-gradient(circle at 30% 25%,#fff6b0,#f9c733 55%,#c98a10);border:3px solid #fff3c4;box-shadow:0 0 0 2px #7a5200}.mini i.o{background:#555;border-color:#aaa;box-shadow:0 0 0 2px #333;filter:grayscale(1);opacity:.6}
+.wdb{text-align:center}.wh{font:800 64px/1.1 "Noto Sans SC",sans-serif;color:var(--pink)}.wp{font:800 22px "Bricolage Grotesque",sans-serif;color:var(--yellow)}
+@media(max-width:900px){.app{grid-template-columns:minmax(0,1fr)}.side{position:static;grid-auto-flow:column;overflow-x:auto}.side .fd{display:none}.nv{white-space:nowrap;width:auto}.g3{grid-template-columns:minmax(0,1fr);grid-template-areas:none}.g3>*{grid-area:auto!important}.g3>.pet{order:-1}}
+</style></head><body><div class="w"><div class="app"><nav class="box side"><div class="fd" style="font-size:22px;margin-bottom:6px">学 Study Hub</div><button class="nv vtb on" data-v="h" type="button">🏠 Home</button><a class="nv" href="hsk2-flashcards.html">🃏 HSK2 Flashcards</a><a class="nv" href="decks.html">📚 Deck Maker</a><button class="nv vtb" data-v="a" type="button">🏅 Achievements</button><a class="nv" href="mochi.html">✏️ Mochi Studio</a></nav><div class="mainc"><div class="top"><h1 id="gr">Welcome back!</h1><p id="sub"></p></div><div class="main"><div class="g3"><div class="box a-st"><div class="sb"><svg viewBox="0 0 24 24" width="36" height="36"><path d="M12 2C13 7 19 9 19 15a7 7 0 0 1-14 0c0-3 2-5 3-7 1 2 2 3 3 3 0-3-1-6 1-9z" fill="#ff8a3d" stroke="#241812" stroke-width="1.2" stroke-linejoin="round"/></svg><div><div class="big" id="sk">0</div><div class="lab">day streak</div></div><div class="wkb"><div class="lab">This week</div><div class="week" id="wk"></div></div></div></div>
+<div class="box a-go"><div class="goal"><div class="ring" id="rg"><i id="rt"></i></div><div><div class="lab">Daily goal</div><div class="fd" style="font-size:20px" id="gs"></div><div class="step"><button id="gm" aria-label="Lower goal">−</button><button id="gp" aria-label="Raise goal">+</button></div></div></div></div>
+<div class="box a-xp"><div class="fd" style="font-size:22px"><span id="xt"></span> <small style="color:var(--muted);font:500 14px 'DM Sans',sans-serif" id="ti"></small></div><div class="bar"><i id="xb"></i></div><small style="color:var(--muted)" id="xn"></small></div><div class="box pet a-pet" id="pet"><a class="pn" href="mochi.html" title="Open Mochi Studio">✏️ Customise</a><svg viewBox="0 0 120 120" aria-label="Your study pet"><g id="pb"><ellipse cx="60" cy="108" rx="46" ry="5" fill="#0004"/><path d="M8 72Q8 28 60 28Q112 28 112 72Q112 107 60 107Q8 107 8 72Z" id="bd" fill="#9be7d0" stroke="#f3e9e1" stroke-width="3"/><path d="M52 31Q50 15 60 13Q70 15 68 31" id="sp" fill="#7fd6bb" stroke="#f3e9e1" stroke-width="3"/><circle cx="26" cy="80" r="7" fill="#ff9ab8" opacity=".7"/><circle cx="94" cy="80" r="7" fill="#ff9ab8" opacity=".7"/><g id="e" stroke="#2a1a12" fill="#2a1a12"></g><path id="m" stroke="#2a1a12" stroke-width="4" stroke-linecap="round"/><g id="x"></g><g id="ac"></g></g></svg><b id="pt"></b><small id="ps"></small></div><div class="box a-dk"><h2 style="font-size:20px;margin-bottom:12px">Your decks</h2><div class="decks" id="dks"><a class="dk d1" href="hsk2-flashcards.html"><h3>HSK2<br>Flashcards</h3><p id="hp"></p><div class="bar"><i id="hb"></i></div><em>Open →</em></a><a class="dk new" href="decks.html"><h3>+ New deck</h3><p>Make your own flashcards</p></a></div></div><div class="box a-md"><div class="lab" id="mt"></div><div class="mini" id="mp"></div><button class="nv" id="va" type="button" style="justify-content:center;margin-top:10px">View all →</button></div><div class="box a-wd wdb"><div class="lab">Word of the day</div><div class="wh" id="wh"></div><div class="wp" id="wp"></div><div id="wm"></div></div></div></div><div id="achv"></div></div></div></div>
+<script>
+var $=function(i){return document.getElementById(i)},J=function(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}};
+var S=J("hsk2",{}),v=Object.values(S),k=v.filter(function(x){return x=="k"}).length,d=v.filter(function(x){return x=="d"}).length,T=150;
+var mo=J("mochi",{}),PN=mo.n||"Mochi",PA=mo.a||"none",fd=function(x){return x.toLocaleDateString("en-CA")},now=new Date(),yd=new Date();yd.setDate(yd.getDate()-1);
+var C=J("hsk2day",{}),t0=new Date();t0.setHours(0,0,0,0);var gap=C.d?Math.round((t0-new Date(C.d+"T00:00:00"))/864e5):99,nt=gap==0?C.n:0;
+var SK=J("hsk2str",{}),sk=(SK.l==fd(now)||SK.l==fd(yd))?SK.n||0:0,GO=+localStorage.getItem("hsk2goal")||20,LG=J("hsk2log",{});
+$("sk").textContent=sk;
+var op='<circle cx="45" cy="58" r="5"/><circle cx="75" cy="58" r="5"/>',ar='<path d="M38 60Q45 50 52 60M68 60Q75 50 82 60" fill="none" stroke-width="4" stroke-linecap="round"/>',cl='<path d="M38 58Q45 64 52 58M68 58Q75 64 82 58" fill="none" stroke-width="4" stroke-linecap="round"/>',tr='<path d="M45 66q-5 9 0 12q5-3 0-12" fill="#6ab4ff" stroke="none"/>',
+spk='<text x="90" y="22" font-size="16">✨</text><text x="12" y="30" font-size="14">✨</text>',zz='<text class="z" x="88" y="36" font-size="12">z</text><text class="z" style="animation-delay:.8s" x="96" y="26" font-size="16">Z</text><text class="z" style="animation-delay:1.6s" x="102" y="16" font-size="20">Z</text>',m;
+if(nt>=15)m={c:"#3b3a22",e:ar,m:"M40 74Q60 106 80 74Z",f:"#c43b5a",x:spk,u:1,t:"Mochi is ecstatic!",s:nt+" cards today – amazing!"};
+else if(nt>=1)m={c:"#22392f",e:ar,m:"M44 76Q60 92 76 76",f:"none",x:"",u:1,t:"Mochi is happy",s:"You studied today ("+nt+" cards). Keep going!"};
+else if(gap==1)m={c:"#3a3322",e:op,m:"M48 84Q60 79 72 84",f:"none",x:"",u:0,t:"Mochi is hungry…",s:"No cards yet today. Feed me some flashcards!"};
+else if(C.d)m={c:"#2b2a3d",e:op+tr,m:"M44 88Q60 74 76 88",f:"none",x:"",u:0,t:"Mochi is sad",s:"Missed "+gap+" days. Come back and cheer me up!"};
+else m={c:"#2a2430",e:cl,m:"M54 82Q60 86 66 82",f:"none",x:zz,u:0,t:"Mochi is sleeping",s:"Do your first flashcards to wake me up!"};
+$("pet").style.background=m.c;$("pet").className="box pet"+(m.u?" up":"");$("e").innerHTML=m.e;$("m").setAttribute("d",m.m);$("m").setAttribute("fill",m.f);$("x").innerHTML=m.x;$("pt").textContent=m.t.replace("Mochi",PN);$("ps").textContent=m.s;
+function dk(h){var n=parseInt(h.slice(1),16);return"#"+[n>>16,n>>8&255,n&255].map(function(c){return Math.round(c*.85).toString(16).padStart(2,"0")}).join("")}
+var mc="#9be7d0";try{mc=localStorage.getItem("hsk2col")||mc}catch(e){}$("bd").setAttribute("fill",mc);$("sp").setAttribute("fill",dk(mc));
+$("ac").innerHTML=(window.MOCHI&&MOCHI.A[PA])||"";
+var mon=new Date(now);mon.setDate(now.getDate()-((now.getDay()+6)%7));var sw={};if(SK.l)for(var a=0;a<(SK.n||0);a++){var z=new Date(SK.l+"T00:00:00");z.setDate(z.getDate()-a);sw[fd(z)]=1}
+$("wk").innerHTML="MTWTFSS".split("").map(function(n,a){var z=new Date(mon);z.setDate(mon.getDate()+a);var q=fd(z);return'<div><i class="'+((LG[q]>0||sw[q]?"on ":"")+(q==fd(now)?"t":""))+'"></i>'+n+"</div>"}).join("");
+function ring(){var p=Math.min(100,nt/GO*100);$("rg").style.background="conic-gradient(var(--teal) "+p+"%,#8884 0)";$("rt").textContent=Math.min(nt,GO);$("gs").textContent=nt>=GO?"Goal reached ✓":(GO-nt)+" to go · "+GO+" a day"}
+$("gm").onclick=function(){GO=Math.max(5,GO-5);try{localStorage.setItem("hsk2goal",GO)}catch(e){}ring()};$("gp").onclick=function(){GO=Math.min(100,GO+5);try{localStorage.setItem("hsk2goal",GO)}catch(e){}ring()};ring();
+var X=+localStorage.getItem("hsk2xp")||0,N=150,TT=["Rookie Learner","Curious Beginner","Word Collector","Character Hunter","Tone Tamer","Pinyin Pro","Vocab Explorer","Hanzi Hero","Mandarin Master","Dragon Scholar"],L=Math.floor(X/N),M=L>=TT.length-1;
+$("xt").textContent="⭐ "+X+" XP";$("ti").textContent="· "+TT[Math.min(L,TT.length-1)];$("xb").style.width=Math.max(M?100:X%N/N*100,3)+"%";$("xn").textContent=M?"Top title reached!":X%N+" / "+N+" XP to "+TT[L+1];
+$("sub").textContent=now.toLocaleDateString("en-GB",{weekday:"long"})+" · Level "+(L+1)+" · "+TT[Math.min(L,TT.length-1)];
+var G=["Hello!","你好!","Welcome back!","Ready to study?","Great to see you!","Hey there, scholar!"];function g(){var n;do n=G[Math.random()*G.length|0];while(n==$("gr").textContent);$("gr").textContent=n}g();$("gr").onclick=g;
+$("hp").textContent=(T-k-d)+" words left · "+k+" known · "+d+" learning";$("hb").style.width=Math.round(k/T*100)+"%";
+var E=function(x){return String(x).replace(/[&<>"]/g,function(c){return"&#"+c.charCodeAt(0)+";"})},DKS=J("decks",[]);
+$("dks").querySelector(".d1").insertAdjacentHTML("afterend",DKS.map(function(x){var kk=Object.values(J("deck_"+x.id,{})).filter(function(y){return y=="k"}).length,n=x.cards.length;return'<a class="dk d2" href="study.html?d='+E(x.id)+'"><h3>'+E(x.name)+"</h3><p>"+n+" cards · "+kk+' known</p><div class="bar"><i style="width:'+(n?Math.round(kk/n*100):0)+'%"></i></div><em>Open →</em></a>'}).join(""));
+var cu=0;try{cu=!!localStorage.getItem("hsk2col")}catch(e){}
+var AB=[["🌱","First Steps","Sort 10 words",k+d,10],["🧠","Word Collector","Know 25 words",k,25],["📚","Half Way","Know 75 words",k,75],["🏆","HSK2 Master","Know all 150 words",k,150],["🔥","3-Day Streak","Study 3 days in a row",sk,3],["⚡","Week Warrior","Reach a 7-day streak",sk,7],["🎯","Goal Getter","Hit your daily goal",nt,GO],["⭐","XP Hunter","Earn 100 XP",X,100],["🎨","Stylist","Customise Mochi",(PA!="none"||cu)?1:0,1],["✍️","Deck Builder","Make a deck",DKS.length,1]];
+$("achv").innerHTML='<div class="ah"><h2>Achievements</h2><span>'+AB.filter(function(a){return a[3]>=a[4]}).length+" of "+AB.length+' earned</span></div><div class="mg">'+AB.map(function(a){return'<div class="mdl'+(a[3]>=a[4]?"":" off")+'"><div class="m">'+a[0]+"</div><b>"+a[1]+"</b><small>"+a[2]+"</small><small>"+Math.min(a[3],a[4])+"/"+a[4]+"</small></div>"}).join("")+"</div>";
+document.querySelectorAll(".vtb").forEach(function(b){b.onclick=function(){document.body.classList.toggle("av",b.dataset.v=="a");document.querySelectorAll(".vtb").forEach(function(x){x.classList.toggle("on",x==b)})}});
+
+$("mt").textContent="Achievements · "+AB.filter(function(a){return a[3]>=a[4]}).length+" of "+AB.length;
+$("mp").innerHTML=AB.map(function(a){return'<i class="'+(a[3]>=a[4]?"":"o")+'" title="'+a[1]+'">'+a[0]+"</i>"}).join("");
+$("va").onclick=function(){document.querySelector('.vtb[data-v="a"]').click()};
+var WD=[["觉得","juéde","to feel, to think"],["非常","fēicháng","very"],["旁边","pángbiān","beside"],["机场","jīchǎng","airport"],["便宜","piányi","cheap"],["生日","shēngrì","birthday"],["准备","zhǔnbèi","to prepare"],["介绍","jièshào","to introduce"],["希望","xīwàng","to hope"],["休息","xiūxi","to rest"],["问题","wèntí","question"],["颜色","yánsè","colour"]],w=WD[Math.floor(Date.now()/864e5)%WD.length];
+$("wh").textContent=w[0];$("wp").textContent=w[1];$("wm").textContent=w[2];
+</script></body></html>

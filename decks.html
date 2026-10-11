@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Deck Maker</title><script src="theme.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@800&display=swap">
+<style>
+:root{--bg:#17120f;--surface:#241c18;--cream:#f6ecd9;--muted:#cdbfa9;--yellow:#f9c733;--pink:#ff8ee0;--teal:#3fdcc8;--ink:#241812;--shadow:#000;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1200px 600px at 20% -10%,#3a2a3f 0%,var(--bg) 60%) var(--bg);color:var(--cream);font:15px/1.45 "DM Sans",system-ui,sans-serif;padding:20px 16px 40px;min-height:100vh}
+h1,.fd{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;margin:0}
+.w{max-width:1040px;margin:auto;display:grid;gap:16px}.top a{color:var(--muted);text-decoration:none;font-weight:700}
+.box{background:var(--surface);border:3px solid var(--cream);border-radius:24px;padding:16px;box-shadow:6px 6px 0 var(--shadow);min-width:0}
+button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}
+input,textarea{background:var(--bg);border:2px solid var(--cream);border-radius:12px;padding:10px 12px;width:100%}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.btn{display:inline-block;text-decoration:none;text-align:center;border:3px solid var(--cream);border-radius:99px;padding:10px 18px;font-weight:800;color:var(--ink);background:var(--yellow);box-shadow:3px 3px 0 var(--shadow)}.btn:active{transform:translate(3px,3px);box-shadow:none}.btn.s{background:var(--surface);color:var(--cream)}.btn.t{background:var(--teal)}.btn[aria-disabled=true]{opacity:.45;pointer-events:none}
+.lab{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block;margin-bottom:6px}
+.g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}@media(max-width:780px){.g{grid-template-columns:minmax(0,1fr)}}
+.col{display:grid;gap:16px}.f{display:grid;gap:12px}.row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:3px solid var(--cream);background:var(--bg);border-radius:99px;padding:6px 14px;font-weight:700;font-size:14px}.chip.on{background:var(--yellow);color:var(--ink)}
+.scene{perspective:1000px;aspect-ratio:4/3;max-height:250px;width:100%;border:0;background:none;padding:0;cursor:pointer}
+.in{position:relative;height:100%;transition:transform .5s;transform-style:preserve-3d}.scene.fl .in{transform:rotateY(180deg)}
+.fc{position:absolute;inset:0;backface-visibility:hidden;border:3px solid var(--cream);border-radius:22px;display:grid;place-content:center;text-align:center;gap:4px;box-shadow:5px 5px 0 var(--shadow);padding:10px}
+.fr{background:var(--pink);color:var(--ink)}.bk{background:var(--surface);transform:rotateY(180deg)}
+.han{font:800 clamp(56px,10vw,90px)/1 "Noto Sans SC",sans-serif}.py{font:800 34px "Bricolage Grotesque",sans-serif;color:var(--yellow)}
+.li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid var(--cream);border-radius:14px;background:var(--bg)}
+.li .h{font:800 26px "Noto Sans SC",sans-serif;min-width:60px}.li .t{flex:1;min-width:0;font-size:13px;color:var(--muted)}.li .t b{display:block;color:var(--yellow);font-size:15px}
+.x{border:0;background:none;font-size:17px;padding:4px 6px}.tag{font-size:12px;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="w"><div class="top"><a href="index.html">← Menu</a></div>
+<div><h1 style="font-size:32px">Deck Maker</h1><p style="margin:4px 0 0;color:var(--muted)">Create decks and flashcards, then study them in the same flashcard mode as HSK2.</p></div>
+<div class="g"><div class="col">
+<div class="box f"><span class="lab" style="margin:0">Your decks</span><div class="row" id="dl"></div>
+<div class="row"><input id="nd" placeholder="New deck name" aria-label="New deck name" style="flex:1;min-width:140px"><button class="btn s" id="ad" type="button">+ New deck</button></div></div>
+<div class="box f"><label class="lab" for="dn" style="margin:0">Deck name</label><input id="dn" aria-label="Deck name"><div class="row"><a class="btn t" id="st" href="#">Study this deck →</a><button class="btn s" id="rm" type="button">Delete deck</button></div></div>
+<form class="box f" id="fm"><span class="lab" style="margin:0" id="fl">Add a card</span><label><span class="lab">Hanzi</span><input id="h" placeholder="苹果" required></label><label><span class="lab">Pinyin</span><input id="p" placeholder="píngguǒ" required></label><label><span class="lab">Meaning</span><input id="m" placeholder="apple" required></label>
+<div class="row"><button class="btn" type="submit" id="sv">+ Add card</button><button class="btn s" type="button" id="ce" hidden>Cancel edit</button></div></form>
+<div class="box f"><label class="lab" for="bu" style="margin:0">Bulk import · one per line: hanzi|pinyin|meaning</label><textarea id="bu" rows="4" placeholder="水|shuǐ|water&#10;茶|chá|tea"></textarea><button class="btn s" id="bi" type="button">Import lines</button></div></div>
+<div class="col"><div class="box"><span class="lab">Preview · tap to flip</span><button class="scene" id="sc" aria-label="Flip preview"><div class="in"><div class="fc fr"><div class="han" id="ph"></div></div><div class="fc bk"><div class="py" id="pp"></div><div id="pm" style="font-size:20px;font-weight:700"></div></div></div></button><div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><button class="btn s" id="pv" type="button">← Prev</button><span class="tag" id="pc"></span><button class="btn s" id="nx" type="button">Next →</button></div></div>
+<div class="box"><span class="lab" id="ct"></span><div class="col" id="ls" style="gap:8px"></div></div></div></div></div>
+<script>
+var $=function(i){return document.getElementById(i)},K="decks",D=[],cur="",ix=0,ei=-1,cf=0;
+try{D=JSON.parse(localStorage.getItem(K)||"[]")}catch(e){}
+if(!D.length)D=[{id:"d"+Date.now(),name:"My words",cards:[]}];cur=D[0].id;
+function sv(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+function dk(){return D.filter(function(x){return x.id==cur})[0]}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return"&#"+c.charCodeAt(0)+";"})}
+function draw(){var d=dk(),c=d.cards;if(ix>=c.length)ix=Math.max(0,c.length-1);var k=c[ix]||["","",""];
+$("dl").innerHTML=D.map(function(x){return'<button class="chip'+(x.id==cur?" on":"")+'" data-i="'+x.id+'">'+esc(x.name)+"</button>"}).join("");
+$("dn").value=d.name;$("st").href="study.html?d="+d.id;$("st").setAttribute("aria-disabled",c.length?"false":"true");$("rm").textContent=cf?"Tap again to delete":"Delete deck";
+$("sc").classList.remove("fl");$("ph").textContent=k[0];$("pp").textContent=k[1];$("pm").textContent=k[2];$("pc").textContent=c.length?(ix+1)+" of "+c.length:"No cards yet";
+$("ct").textContent=d.name+" · "+c.length+" cards";
+$("ls").innerHTML=c.length?c.map(function(x,i){return'<div class="li"><span class="h">'+esc(x[0])+'</span><span class="t"><b>'+esc(x[1])+"</b>"+esc(x[2])+'</span><button class="x" data-e="'+i+'" aria-label="Edit card">✎</button><button class="x" data-d="'+i+'" aria-label="Delete card">✕</button></div>'}).join(""):'<div class="tag">Add your first card on the left.</div>';
+$("fl").textContent=ei>=0?"Edit card":"Add a card";$("sv").textContent=ei>=0?"Save card":"+ Add card";$("ce").hidden=ei<0}
+$("dl").onclick=function(e){var i=e.target.dataset.i;if(!i)return;cur=i;ix=0;ei=-1;cf=0;draw()};
+$("ad").onclick=function(){var n=$("nd").value.trim();if(!n)return;var d={id:"d"+Date.now(),name:n,cards:[]};D.push(d);cur=d.id;ix=0;$("nd").value="";sv();draw()};
+$("dn").oninput=function(){dk().name=$("dn").value||"Untitled";sv();var b=document.querySelector(".chip.on");if(b)b.textContent=dk().name;$("ct").textContent=dk().name+" · "+dk().cards.length+" cards"};
+$("rm").onclick=function(){if(!cf){cf=1;draw();return}D=D.filter(function(x){return x.id!=cur});if(!D.length)D=[{id:"d"+Date.now(),name:"My words",cards:[]}];try{localStorage.removeItem("deck_"+cur)}catch(e){}cur=D[0].id;cf=0;ix=0;sv();draw()};
+$("fm").onsubmit=function(e){e.preventDefault();var c=[$("h").value.trim(),$("p").value.trim(),$("m").value.trim()],d=dk();if(ei>=0){d.cards[ei]=c;ix=ei;ei=-1}else{d.cards.push(c);ix=d.cards.length-1}["h","p","m"].forEach(function(i){$(i).value=""});$("h").focus();sv();draw()};
+$("ce").onclick=function(){ei=-1;["h","p","m"].forEach(function(i){$(i).value=""});draw()};
+$("bi").onclick=function(){var d=dk();$("bu").value.split("\n").forEach(function(l){var a=l.split("|").map(function(x){return x.trim()});if(a.length>=3&&a[0])d.cards.push(a.slice(0,3))});$("bu").value="";sv();draw()};
+$("ls").onclick=function(e){var t=e.target,d=dk();if(t.dataset.d!=null){d.cards.splice(+t.dataset.d,1);ei=-1;sv();draw()}else if(t.dataset.e!=null){ei=+t.dataset.e;var c=d.cards[ei];$("h").value=c[0];$("p").value=c[1];$("m").value=c[2];draw();$("h").focus()}};
+$("sc").onclick=function(){this.classList.toggle("fl")};$("nx").onclick=function(){var n=dk().cards.length;if(n){ix=(ix+1)%n;draw()}};$("pv").onclick=function(){var n=dk().cards.length;if(n){ix=(ix-1+n)%n;draw()}};
+draw();
+</script></body></html>
