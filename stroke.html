@@ -48,7 +48,7 @@ function seg(a,b){var r=cv.getBoundingClientRect();c.beginPath();c.moveTo(a[0]*r
 cv.onpointerdown=function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}pen();cur=[pt(e)];ST.push(cur);seg(cur[0],cur[0])};
 cv.onpointermove=function(e){if(!cur)return;e.preventDefault();(e.getCoalescedEvents?e.getCoalescedEvents():[e]).forEach(function(x){var p=pt(x);seg(cur[cur.length-1],p);cur.push(p)})};
 cv.onpointerup=cv.onpointercancel=function(){if(!cur)return;cur=null;stat()};
-cv.oncontextmenu=function(e){e.preventDefault()};
+cv.oncontextmenu=function(e){e.preventDefault()};["touchstart","touchmove","touchend"].forEach(function(n){cv.addEventListener(n,function(e){e.preventDefault()},{passive:false})});document.querySelector(".pad").addEventListener("touchmove",function(e){e.preventDefault()},{passive:false});
 function stat(){sc=ST.length;var tg=CL[wi][1],o=sc>tg+SLACK;$("sc").textContent=sc+" / "+tg;$("sc").style.color=o?"var(--pink)":""}
 function clr(){ST=[];cur=null;redraw();stat()}
 function word(){var e=CL[wi];$("gh").textContent=e[0];$("py").textContent=e[0]+" · from "+e[2][0]+" "+e[2][1];$("mn").textContent=e[2][2]+" · target "+e[1]+" strokes";clr()}
