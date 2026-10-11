@@ -1,0 +1,41 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stroke Studio</title><script src="theme.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@700;800&display=swap"><style>
+/* three themes from the live site: Candy Pop (default), Matcha Light, Midnight Ink */
+:root{--bg:#17120f;--surface:#241c18;--cream:#f6ecd9;--muted:#cdbfa9;--yellow:#f9c733;--pink:#ff8ee0;--teal:#3fdcc8;--ink:#241812;--shadow:#000;--fx:radial-gradient(1200px 600px at 20% -10%,#3a2a3f 0%,#17120f 60%);color-scheme:dark}
+:root[data-t=matcha]{--bg:#eef2e6;--surface:#fbfdf6;--cream:#1f2a1c;--muted:#5d6b57;--yellow:#e9b949;--pink:#f2a0a0;--teal:#6fb78a;--ink:#1f2a1c;--shadow:#1f2a1c;--fx:none;color-scheme:light}
+:root[data-t=ink]{--bg:#0e1424;--surface:#182038;--cream:#e8ecff;--muted:#9aa6d1;--yellow:#8f9bff;--pink:#ff9ec7;--teal:#5ee0c0;--ink:#0e1424;--shadow:#050810;--fx:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--fx) var(--bg);color:var(--cream);font:15px/1.45 "DM Sans",system-ui,sans-serif;padding-inline:16px;padding-block:18px 40px;min-height:100vh}
+h1,h2,h3,.fd{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.w{max-width:1180px;margin:auto;display:grid;gap:16px}
+.box{background:var(--surface);border:3px solid var(--cream);border-radius:22px;padding:16px;box-shadow:5px 5px 0 var(--shadow);min-width:0}
+.lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.pills{display:flex;gap:6px;flex-wrap:wrap}.pills button{border:3px solid var(--cream);background:var(--surface);border-radius:99px;padding:5px 13px;font-weight:700;font-size:13px}.pills button.on{background:var(--yellow);color:var(--ink)}
+.btn{border:3px solid var(--cream);background:var(--yellow);color:var(--ink);border-radius:16px;padding:10px 18px;font-weight:800;box-shadow:4px 4px 0 var(--shadow)}.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--shadow)}
+.btn.alt{background:var(--surface);color:var(--cream)}.btn.pk{background:var(--pink)}.btn.tl{background:var(--teal)}
+.meter{height:12px;border:2px solid var(--cream);border-radius:99px;overflow:hidden;background:var(--bg)}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .4s}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--cream);color:var(--bg);padding:8px 16px;border-radius:99px;font-weight:700;transition:.25s;pointer-events:none}.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.w{max-width:560px}.pad{position:relative;aspect-ratio:1;border:3px solid var(--cream);border-radius:24px;background:var(--surface);box-shadow:6px 6px 0 var(--shadow);overflow:hidden;touch-action:none}
+.pad:before,.pad:after{content:"";position:absolute;background:repeating-linear-gradient(90deg,var(--muted) 0 6px,transparent 6px 14px);opacity:.35}.pad:before{left:0;right:0;top:50%;height:2px}.pad:after{top:0;bottom:0;left:50%;width:2px;background:repeating-linear-gradient(0deg,var(--muted) 0 6px,transparent 6px 14px)}
+.gh{position:absolute;inset:0;display:grid;place-items:center;font:700 min(70vw,330px)/1 "Noto Sans SC";color:var(--muted);opacity:.28;pointer-events:none;user-select:none}.gh.off{opacity:0}
+canvas{position:absolute;inset:0;width:100%;height:100%}.row{display:flex;gap:10px;flex-wrap:wrap}
+</style><script>var R=document.documentElement,TH=[["candy","Candy Pop"],["matcha","Matcha Light"],["ink","Midnight Ink"]];
+function tpills(el){el.innerHTML=TH.map(function(t){return'<button data-k="'+t[0]+'">'+t[1]+'</button>'}).join("");var cur="candy";try{cur=localStorage.getItem("hubtheme")||cur}catch(e){}
+function set(k){R.dataset.t=k;[].forEach.call(el.children,function(c){c.classList.toggle("on",c.dataset.k==k)});try{localStorage.setItem("hubtheme",k)}catch(e){}}
+el.onclick=function(e){if(e.target.dataset.k)set(e.target.dataset.k)};set(cur)}
+var $=function(i){return document.getElementById(i)};function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("on")},1600)}
+var W=[["觉得","juéde","to feel, to think"],["非常","fēicháng","very"],["旁边","pángbiān","beside"],["机场","jīchǎng","airport"],["便宜","piányi","cheap"],["生日","shēngrì","birthday"],["准备","zhǔnbèi","to prepare"],["介绍","jièshào","to introduce"],["希望","xīwàng","to hope"],["考试","kǎoshì","exam"],["说话","shuōhuà","to speak"],["身体","shēntǐ","body"]];</script><div class="toast" id="toast" role="status"></div><div class="w"><header class="bar top"><b class="fd" style="font-size:22px">Stroke Studio</b><a class="btn alt" href="index.html" style="padding:6px 14px;text-decoration:none">← Study Hub</a></header>
+<div class="bar"><div><div class="fd" style="font-size:26px" id="py"></div><div style="color:var(--muted)" id="mn"></div></div><span class="lab">Strokes drawn <b id="sc">0</b></span></div>
+<div class="pad" id="pad"><div class="gh" id="gh"></div><canvas id="cv"></canvas></div>
+<div class="row"><button class="btn alt" id="gd">Hide guide</button><button class="btn pk" id="cl">Clear</button><button class="btn" id="nx">Next word</button></div></div><script>var cv=$("cv"),c=cv.getContext("2d"),dn=0,sc=0,wi=0,gv=1;
+function size(){var r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;c.setTransform(d,0,0,d,0,0)}
+function pos(e){var r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]}
+cv.onpointerdown=function(e){dn=1;cv.setPointerCapture(e.pointerId);var p=pos(e);c.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue("--pink");c.lineWidth=Math.max(8,cv.getBoundingClientRect().width/32);c.lineCap=c.lineJoin="round";c.beginPath();c.moveTo(p[0],p[1]);c.lineTo(p[0]+.1,p[1]+.1);c.stroke()};
+cv.onpointermove=function(e){if(!dn)return;var p=pos(e);c.lineTo(p[0],p[1]);c.stroke()};
+cv.onpointerup=cv.onpointercancel=function(){if(!dn)return;dn=0;sc++;$("sc").textContent=sc};
+function clr(){var r=cv.getBoundingClientRect();c.clearRect(0,0,r.width,r.height);sc=0;$("sc").textContent=0}
+function word(){var w=W[wi];$("gh").textContent=w[0][0];$("py").textContent=w[0]+" · "+w[1];$("mn").textContent=w[2];clr()}
+$("cl").onclick=clr;$("nx").onclick=function(){wi=(wi+1)%W.length;word()};$("gd").onclick=function(){gv=!gv;$("gh").classList.toggle("off",!gv);this.textContent=gv?"Hide guide":"Show guide"};
+addEventListener("resize",function(){size();clr()});size();word();</script>

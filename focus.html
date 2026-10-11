@@ -1,0 +1,51 @@
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Focus Nest</title><script src="theme.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@700;800&display=swap"><style>
+/* three themes from the live site: Candy Pop (default), Matcha Light, Midnight Ink */
+:root{--bg:#17120f;--surface:#241c18;--cream:#f6ecd9;--muted:#cdbfa9;--yellow:#f9c733;--pink:#ff8ee0;--teal:#3fdcc8;--ink:#241812;--shadow:#000;--fx:radial-gradient(1200px 600px at 20% -10%,#3a2a3f 0%,#17120f 60%);color-scheme:dark}
+:root[data-t=matcha]{--bg:#eef2e6;--surface:#fbfdf6;--cream:#1f2a1c;--muted:#5d6b57;--yellow:#e9b949;--pink:#f2a0a0;--teal:#6fb78a;--ink:#1f2a1c;--shadow:#1f2a1c;--fx:none;color-scheme:light}
+:root[data-t=ink]{--bg:#0e1424;--surface:#182038;--cream:#e8ecff;--muted:#9aa6d1;--yellow:#8f9bff;--pink:#ff9ec7;--teal:#5ee0c0;--ink:#0e1424;--shadow:#050810;--fx:none;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--fx) var(--bg);color:var(--cream);font:15px/1.45 "DM Sans",system-ui,sans-serif;padding-inline:16px;padding-block:18px 40px;min-height:100vh}
+h1,h2,h3,.fd{font-family:"Bricolage Grotesque","Trebuchet MS",sans-serif;margin:0;text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.w{max-width:1180px;margin:auto;display:grid;gap:16px}
+.box{background:var(--surface);border:3px solid var(--cream);border-radius:22px;padding:16px;box-shadow:5px 5px 0 var(--shadow);min-width:0}
+.lab{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.bar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.pills{display:flex;gap:6px;flex-wrap:wrap}.pills button{border:3px solid var(--cream);background:var(--surface);border-radius:99px;padding:5px 13px;font-weight:700;font-size:13px}.pills button.on{background:var(--yellow);color:var(--ink)}
+.btn{border:3px solid var(--cream);background:var(--yellow);color:var(--ink);border-radius:16px;padding:10px 18px;font-weight:800;box-shadow:4px 4px 0 var(--shadow)}.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--shadow)}
+.btn.alt{background:var(--surface);color:var(--cream)}.btn.pk{background:var(--pink)}.btn.tl{background:var(--teal)}
+.meter{height:12px;border:2px solid var(--cream);border-radius:99px;overflow:hidden;background:var(--bg)}.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--yellow),var(--pink));transition:width .4s}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--cream);color:var(--bg);padding:8px 16px;border-radius:99px;font-weight:700;transition:.25s;pointer-events:none}.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.mw{display:grid;gap:10px;justify-items:center}.mw svg{width:min(100%,200px);overflow:visible}
+.bubble{position:relative;background:var(--surface);border:3px solid var(--cream);padding:10px 12px;border-radius:16px;font-weight:700;font-size:14px;min-height:54px;display:grid;align-items:center;text-align:center;width:100%}
+.bubble:before{content:"";position:absolute;top:-11px;left:50%;margin-left:-8px;border:8px solid transparent;border-bottom-color:var(--cream);border-top:0}
+#mochi.bounce{animation:bnc .6s}#mochi.shake{animation:shk .5s}
+@keyframes bnc{0%,100%{transform:translateY(0)}30%{transform:translateY(-16px) scale(.95,1.08)}60%{transform:translateY(0) scale(1.08,.92)}}
+@keyframes shk{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+
+.w{max-width:760px}.m2{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:16px;align-items:center}@media(max-width:680px){.m2{grid-template-columns:1fr}}
+.rg{--p:0;width:min(78vw,280px);aspect-ratio:1;border-radius:50%;margin:auto;display:grid;place-items:center;background:conic-gradient(var(--yellow) calc(var(--p)*1%),var(--bg) 0);border:3px solid var(--cream);box-shadow:5px 5px 0 var(--shadow)}
+.rg div{width:82%;aspect-ratio:1;border-radius:50%;background:var(--surface);border:3px solid var(--cream);display:grid;place-content:center;text-align:center}.rg b{font:800 clamp(44px,12vw,68px)/1 "Bricolage Grotesque";font-variant-numeric:tabular-nums}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}.pips{display:flex;gap:6px;justify-content:center;margin-top:10px}.pips i{width:16px;height:16px;border-radius:50%;border:2px solid var(--cream);background:var(--bg)}.pips i.on{background:var(--teal)}
+</style><script>var R=document.documentElement,TH=[["candy","Candy Pop"],["matcha","Matcha Light"],["ink","Midnight Ink"]];
+function tpills(el){el.innerHTML=TH.map(function(t){return'<button data-k="'+t[0]+'">'+t[1]+'</button>'}).join("");var cur="candy";try{cur=localStorage.getItem("hubtheme")||cur}catch(e){}
+function set(k){R.dataset.t=k;[].forEach.call(el.children,function(c){c.classList.toggle("on",c.dataset.k==k)});try{localStorage.setItem("hubtheme",k)}catch(e){}}
+el.onclick=function(e){if(e.target.dataset.k)set(e.target.dataset.k)};set(cur)}
+var $=function(i){return document.getElementById(i)};function toast(m){var t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("on")},1600)}
+var W=[["觉得","juéde","to feel, to think"],["非常","fēicháng","very"],["旁边","pángbiān","beside"],["机场","jīchǎng","airport"],["便宜","piányi","cheap"],["生日","shēngrì","birthday"],["准备","zhǔnbèi","to prepare"],["介绍","jièshào","to introduce"],["希望","xīwàng","to hope"],["考试","kǎoshì","exam"],["说话","shuōhuà","to speak"],["身体","shēntǐ","body"]];</script><div class="toast" id="toast" role="status"></div><div class="w"><header class="bar top"><b class="fd" style="font-size:22px">Focus Nest</b><a class="btn alt" href="index.html" style="padding:6px 14px;text-decoration:none">← Study Hub</a></header>
+<div class="pills" id="md"><button data-m="f" class="on">Focus 25</button><button data-m="b">Break 5</button><button id="ft">Fast demo: off</button></div>
+<div class="m2"><section class="box" style="padding:22px 16px"><div class="rg" id="rg"><div><b id="tm">25:00</b><span class="lab" id="ph">Ready to focus</span></div></div><div class="row"><button class="btn" id="go">Start</button><button class="btn alt" id="rs">Reset</button></div><div class="pips" id="pp"></div><div class="lab" style="text-align:center;margin-top:8px">Sessions today <b id="ns">0</b> · ⭐ <b id="xp">0</b> XP</div></section><aside class="box"><div class="mw"><svg id="mochi" viewBox="0 0 140 120" role="img" aria-label="Mochi the study pet"><ellipse cx="70" cy="110" rx="46" ry="6" fill="#000" opacity=".3"/><path id="msp" d="M70 12c4 0 7 3 6 7-1 3-3 5-6 5s-5-2-6-5c-1-4 2-7 6-7z" fill="#7fd6bb" stroke="var(--cream)" stroke-width="3"/><path id="mbd" d="M18 70c0-30 24-48 52-48s52 18 52 48c0 24-20 38-52 38S18 94 18 70z" fill="#9be7d0" stroke="var(--cream)" stroke-width="4"/><ellipse cx="38" cy="82" rx="9" ry="6" fill="#ff8ee0" opacity=".85"/><ellipse cx="102" cy="82" rx="9" ry="6" fill="#ff8ee0" opacity=".85"/><g id="eyes" stroke="#241812" stroke-width="4" stroke-linecap="round" fill="none"><path d="M44 66q6-8 12 0"/><path d="M84 66q6-8 12 0"/></g><path id="mouth" d="M58 82q12 12 24 0" stroke="#241812" stroke-width="4" stroke-linecap="round" fill="none"/><g id="acc"></g></svg><div class="bubble" id="bubble">Press start and I'll study with you.</div></div></aside></div></div><script>try{var _c=localStorage.getItem('hsk2col');if(_c){$('mbd').setAttribute('fill',_c);$('msp').setAttribute('fill',_c)}var _m=window.MOCHI&&MOCHI.A[MOCHI.load().a];if(_m)$('acc').innerHTML='<g transform="translate(10,-6)">'+_m+'</g>'}catch(e){}
+var MOUTH={happy:"M58 82q12 12 24 0",oops:"M58 90q12-10 24 0",wow:"M64 82a6 7 0 1 0 12 0a6 7 0 1 0-12 0",flat:"M60 84h20"},mo=$("mochi");
+function mood(cls,m,text){mo.classList.remove("bounce","shake");void mo.getBoundingClientRect();if(cls)mo.classList.add(cls);$("mouth").setAttribute("d",MOUTH[m]);
+$("eyes").innerHTML=m=="oops"?'<path d="M44 60l12 6"/><path d="M96 60l-12 6"/>':m=="flat"?'<path d="M44 66h12"/><path d="M84 66h12"/>':'<path d="M44 66q6-8 12 0"/><path d="M84 66q6-8 12 0"/>';if(text)$("bubble").textContent=text}
+function yes(w){mood("bounce","wow","+10 XP! "+w+" is yours.")}function no(w){mood("shake","oops","+5 XP. "+w+" goes to your review pile.")}
+var m="f",D={f:1500,b:300},t=1500,run=0,iv,fast=0,ns=0,xp=0,tk=0;mood(null,"flat","Press start and I'll study with you.");
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function draw(){$("tm").textContent=fmt(t);$("rg").style.setProperty("--p",(1-t/D[m])*100);$("ph").textContent=run?(m=="f"?"Focusing":"Resting"):(t==D[m]?"Ready":"Paused");$("go").textContent=run?"Pause":t==D[m]?"Start":"Resume";
+$("pp").innerHTML=[0,1,2,3].map(function(i){return'<i class="'+(i<ns%4||(ns&&ns%4==0&&i<4)?"on":"")+'"></i>'}).join("");$("ns").textContent=ns;$("xp").textContent=xp}
+function tick(){t=Math.max(0,t-(fast?25:1));tk++;if(m=="f"&&tk%10==0)mood("bounce","happy","");if(!t){clearInterval(iv);run=0;if(m=="f"){ns++;xp+=50;mood("bounce","wow","Session done! +50 XP. Take a 5 minute break.");setm("b",1)}else{mood("bounce","happy","Break over. Ready for another?");setm("f",1)}}draw()}
+function setm(k,keep){m=k;t=D[k];if(!keep){run=0;clearInterval(iv)}[].forEach.call($("md").children,function(b){b.classList.toggle("on",b.dataset.m==k)});draw()}
+$("go").onclick=function(){if(run){run=0;clearInterval(iv);mood(null,"flat","Paused. I'll keep your seat warm.")}else{run=1;clearInterval(iv);iv=setInterval(tick,1000);mood("bounce","happy",m=="f"?"Eyes on the cards. You've got this.":"Stretch and sip some water.")}draw()};
+$("rs").onclick=function(){setm(m);mood(null,"flat","Reset. Ready when you are.")};
+$("md").onclick=function(e){var b=e.target;if(b.dataset.m)setm(b.dataset.m);if(b.id=="ft"){fast=!fast;b.textContent="Fast demo: "+(fast?"on":"off")}};draw();</script>
